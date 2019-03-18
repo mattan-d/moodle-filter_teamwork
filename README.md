@@ -15,7 +15,14 @@ Purpose
 Plugin Team Work is a filter plugin to allow for teacher and students 
 to create teams for assignment submissions.
 
-[![Watch the video](https://blog.devlion.co/wp-content/uploads/image-10-1024x497.png)](https://blog.devlion.co/wp-content/uploads/Team-work-overvie.mov)
+![alt Moodle plugin Team Work](https://blog.devlion.co/wp-content/uploads/image-10-1024x497.png)
+
+1) Teacher can create teams and remove them from the list
+2) Teacher can Drug and Drop his students to the Teams
+3) Teacher can randomize the number of the teams and students inside of each team (default is 10 teams and 3 students in each of them)
+4) Teacher can allow to students sharing themself to the teams
+5) Teacher can define teams for each group of the course
+and more... view detailed tutorial [Team Work Tutorial](https://blog.devlion.co/moodle-filter-team-work-tutorial/) 
 
 Requirements
 ------------
