@@ -12,8 +12,10 @@ Change Log
 Purpose
 -------
 
-Plugin team work is a filter plugin to allow for teacher and students 
+Plugin Team Work is a filter plugin to allow for teacher and students 
 to create teams for assignment submissions.
+
+[![Watch the video](https://blog.devlion.co/wp-content/uploads/image-10-1024x497.png)](https://blog.devlion.co/wp-content/uploads/Team-work-overvie.mov)
 
 Requirements
 ------------
