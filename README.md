@@ -18,9 +18,8 @@ How to enable it:
 1) Download and install plugin.
 2) Enable plugin in filter "Mange filters" interface.
 3) Add new activity "assignment" and must set description of this activity (filter will work just if you define description).
-4) In activity page you will see blue button "Team Work".
-5) Click on it an you will see pop up with teams defenitions.
-[detailed tutorial](https://blog.devlion.co/moodle-filter-team-work-tutorial/) 
+4) In activity page you will see blue button "Team Work". Click on it an you will see pop up with teams defenitions.
+[more](https://blog.devlion.co/moodle-filter-team-work-tutorial/) 
 
 
 ![alt Moodle plugin Team Work](https://blog.devlion.co/wp-content/uploads/image-10-1024x497.png)
@@ -30,7 +29,7 @@ How to enable it:
 3) Teacher can randomize the number of the teams and students inside of each team (default is 10 teams and 3 students in each of them).
 4) Teacher can allow to students sharing themself to the teams.
 5) Teacher can define teams for each group of the course.
-and more... [detailed tutorial](https://blog.devlion.co/moodle-filter-team-work-tutorial/) 
+and more... [more](https://blog.devlion.co/moodle-filter-team-work-tutorial/) 
 
 Requirements
 ------------
