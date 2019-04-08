@@ -43,5 +43,5 @@ GPL v3
 Credits
 -------
 
-Was designed and funded by the department of science teaching at the [Weizmann institute of science](http://www.weizmann.ac.il/pages/), israel.
+Was designed and funded by the [Department of science teaching](https://stwww1.weizmann.ac.il/en/) at the [Weizmann institute of science](http://www.weizmann.ac.il/pages/), israel.
 And developed for the [PeTeL - personalized teaching and learning envirunment](https://stwww1.weizmann.ac.il/petel/) project by [DevLion](https://blog.devlion.co/moodle-filter-team-work-tutorial/).
