@@ -15,12 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This filter provides for teacher sharing students in teams and make groups
- * Submissions in each team just in activity assign
+ * Allow teachers and students to create and manage "teams" from within the assignment.
+ * These "teams" exist only in that specific assignment, and are used for collaborative submission of that assignment.
  *
- * @package    filter_teamwork
- * @copyright 2019 onwards - Weizmann institute @author Devlion info@devlion.co
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     filter
+ * @subpackage  teamwork
+ * @copyright   2019 onwards - Weizmann institute, Department of Science teaching.
+ * @author      PeTeL project manager petel@weizmann.ac.il
+ * @author      Devlion LTD info@devlion.co
+ * @author      Nadav Kavalerchik <nadav.kavalerchik@weizmann.ac.il>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
@@ -36,7 +40,6 @@ $string['reset'] = 'Reset';
 $string['search'] = 'Search';
 $string['available_team'] = 'Available team';
 $string['choice_by_students'] = 'Choice by students';
-$string['random_groups'] = 'Random groups';
 $string['random_groups'] = 'Random groups';
 $string['how_studens_each_team'] = 'How many students on each team';
 $string['student_in_each_group'] = 'Number of student in each group';
@@ -68,5 +71,4 @@ $string['month9'] = 'September';
 $string['month10'] = 'October';
 $string['month11'] = 'November';
 $string['month12'] = 'December';
-$string['letsubmitafterteamworkenddate'] =
-        'The assignment is in the "Students choose a team" mode, up to date: {$a}. At the end of the division process for the teams, the assignment will be opened.';
+$string['letsubmitafterteamworkenddate'] = 'The assignment is in the "Students choose a team" mode, up to date: {$a}. At the end of the division process for the teams, the assignment will be opened.';

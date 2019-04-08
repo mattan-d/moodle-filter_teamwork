@@ -33,12 +33,14 @@ and more... [more](https://blog.devlion.co/moodle-filter-team-work-tutorial/)
 
 Requirements
 ------------
-New Versions:  Moodle 3.6 or later.
+Moodle version:  Moodle 3.6+
+PHP version: 7.0+
+DB version: MySQL 5.6+ / MariaDB 5.5+
 
 License
 -------
 
-GPL v3
+GPL v3 - http://www.gnu.org/copyleft/gpl.html
 
 Credits
 -------
