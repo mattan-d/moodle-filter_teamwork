@@ -33,9 +33,15 @@ and more... [more](https://blog.devlion.co/moodle-filter-team-work-tutorial/)
 
 Requirements
 ------------
-New Versions:  Moodle 3.6 or later til 3.3
+New Versions:  Moodle 3.6 or later.
 
 License
 -------
 
 GPL v3
+
+Credits
+-------
+
+Was designed and funded by the department of science teaching at the [Weizmann institute of science](http://www.weizmann.ac.il/pages/), israel.
+And developed for the [PeTeL - personalized teaching and learning envirunment](https://stwww1.weizmann.ac.il/petel/) project by [DevLion](https://blog.devlion.co/moodle-filter-team-work-tutorial/).
