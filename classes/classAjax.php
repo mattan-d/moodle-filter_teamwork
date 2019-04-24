@@ -48,7 +48,7 @@ class classAjax {
 
     // Main popup.
     private function render_teamwork_html() {
-        global $CFG, $USER, $PAGE, $OUTPUT, $DB;
+        global $OUTPUT;
 
         $courseid = optional_param('courseid', '', PARAM_INT);
         $activityid = optional_param('activityid', '', PARAM_INT);
@@ -91,7 +91,7 @@ class classAjax {
 
     // Set teamwork enable/disable.
     public function set_teamwork_enable() {
-        global $USER, $DB, $OUTPUT;
+        global $USER, $DB;
 
         $activityid = optional_param('activityid', '', PARAM_INT);
         $moduletype = optional_param('moduletype', '', PARAM_TEXT);
@@ -126,7 +126,7 @@ class classAjax {
 
     // Set access to student.
     public function set_access_to_student() {
-        global $USER, $DB, $OUTPUT;
+        global $DB;
 
         $accesstosdudent = optional_param('access', '', PARAM_INT);
         $activityid = optional_param('activityid', '', PARAM_INT);
@@ -152,7 +152,6 @@ class classAjax {
 
     // Add new card.
     public function add_new_card() {
-        global $USER, $DB, $OUTPUT;
 
         $courseid = optional_param('courseid', '', PARAM_INT);
         $activityid = optional_param('activityid', '', PARAM_INT);
@@ -168,7 +167,7 @@ class classAjax {
 
     // Delete card.
     public function delete_card() {
-        global $USER, $DB, $OUTPUT;
+        global $DB;
 
         $teamid = optional_param('teamid', '', PARAM_TEXT);
 
@@ -180,9 +179,9 @@ class classAjax {
 
     // Show random popup.
     public function show_random_popup() {
-        global $USER, $DB, $OUTPUT;
+        global $OUTPUT;
 
-        $data = array('num_students' => 10);
+        $data = array('num_students' => FILTER_TEAMWORK_USERS_IN_GROUP);
         $html = $OUTPUT->render_from_template('filter_teamwork/popup-team-selection', $data);
 
         $arrcontent = array(
@@ -195,7 +194,7 @@ class classAjax {
 
     // Set random team.
     public function set_random_team() {
-        global $USER, $DB, $OUTPUT;
+        global $DB;
 
         $numberofstudent = optional_param('numberOfStudent', '', PARAM_INT);
         $courseid = optional_param('courseid', '', PARAM_INT);
@@ -229,7 +228,7 @@ class classAjax {
 
     // Set name card.
     public function set_new_team_name() {
-        global $USER, $DB, $OUTPUT;
+        global $DB;
 
         $cardid = optional_param('cardid', '', PARAM_INT);
         $cardname = optional_param('cardname', '', PARAM_TEXT);
@@ -245,7 +244,7 @@ class classAjax {
 
     // Drag student to/from card.
     public function drag_student_card() {
-        global $USER, $DB, $OUTPUT;
+        global $USER, $DB;
 
         $courseid = optional_param('courseid', '', PARAM_INT);
         $activityid = optional_param('activityid', '', PARAM_INT);
@@ -332,7 +331,7 @@ class classAjax {
     // Render ajax.
 
     public function render_teams_card() {
-        global $USER, $DB, $OUTPUT;
+        global $OUTPUT;
 
         $activityid = optional_param('activityid', '', PARAM_INT);
         $courseid = optional_param('courseid', '', PARAM_INT);
@@ -355,7 +354,7 @@ class classAjax {
     }
 
     public function render_student_list() {
-        global $USER, $DB, $OUTPUT;
+        global $OUTPUT;
 
         $selectgroupid = optional_param('selectgroupid', '', PARAM_TEXT);
         $activityid = optional_param('activityid', '', PARAM_INT);
@@ -376,7 +375,7 @@ class classAjax {
     }
 
     public function render_student_settings_popup() {
-        global $USER, $DB, $OUTPUT;
+        global $DB, $OUTPUT;
         $activityid = optional_param('activityid', '', PARAM_INT);
         $moduletype = optional_param('moduletype', '', PARAM_TEXT);
 
@@ -432,7 +431,7 @@ class classAjax {
     }
 
     public function student_settings_popup_data() {
-        global $USER, $DB;
+        global $DB;
 
         $courseid = optional_param('courseid', '', PARAM_INT);
         $activityid = optional_param('activityid', '', PARAM_INT);

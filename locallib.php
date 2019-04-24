@@ -27,11 +27,11 @@ defined('MOODLE_INTERNAL') || die();
 global $CFG;
 require_once($CFG->dirroot . '/group/lib.php');
 
-define('FILTER_TEAMWORK_USERS_IN_GROUP', '5');
+define('FILTER_TEAMWORK_USERS_IN_GROUP', '10');
 
 // Get module name.
 function get_module_name($activityid) {
-    global $CFG, $USER, $DB, $PAGE;
+    global $DB;
 
     $sql = "SELECT m.name 
         FROM {course_modules} AS cm
@@ -50,7 +50,7 @@ function get_module_name($activityid) {
 
 // Get mod events members.
 function get_mod_events_members($activityid, $userid, $mod) {
-    global $CFG, $USER, $DB, $PAGE;
+    global $DB;
 
     if (!in_array($mod, array('quiz', 'assign'))) {
         return false;
@@ -92,7 +92,7 @@ function get_mod_events_members($activityid, $userid, $mod) {
 
 // If user teacher on course.
 function if_user_teacher_on_course($courseid) {
-    global $CFG, $USER, $DB, $PAGE;
+    global $USER;
 
     if (is_siteadmin()) {
         return true;
@@ -113,7 +113,7 @@ function if_user_teacher_on_course($courseid) {
 
 // If user student on course.
 function if_user_student_on_course($courseid) {
-    global $CFG, $USER, $DB, $PAGE;
+    global $USER;
 
     $permissions = array('student');
     $context = context_course::instance($courseid);
@@ -130,7 +130,6 @@ function if_user_student_on_course($courseid) {
 
 // If user student on course.
 function if_to_user_groups_empty($courseid) {
-    global $CFG, $USER, $DB, $PAGE;
 
     $groups = view_groups_select($courseid);
 
@@ -143,7 +142,7 @@ function if_to_user_groups_empty($courseid) {
 
 // Return users data for students fo HTML.
 function return_data_for_student_to_html($activityid, $moduletype, $courseid, $jsonselectgroupid) {
-    global $CFG, $USER, $DB, $PAGE;
+    global $USER;
 
     $result = array();
     $cards = get_cards($activityid, $moduletype, $courseid, $jsonselectgroupid[0]);
@@ -161,7 +160,7 @@ function return_data_for_student_to_html($activityid, $moduletype, $courseid, $j
 
 // If team block enable.
 function if_teamwork_enable($activityid) {
-    global $CFG, $USER, $DB, $PAGE;
+    global $DB;
 
     $teamwork = $DB->get_record('teamwork', array('moduleid' => $activityid, 'type' => get_module_name($activityid)));
     if (!empty($teamwork) && $teamwork->active == 1) {
@@ -173,7 +172,7 @@ function if_teamwork_enable($activityid) {
 
 // If access to student.
 function if_access_to_student($activityid) {
-    global $CFG, $USER, $DB, $PAGE;
+    global $DB;
 
     $teamwork = $DB->get_record('teamwork', array('moduleid' => $activityid, 'type' => get_module_name($activityid)));
     if (!empty($teamwork)) {
@@ -288,7 +287,7 @@ function view_groups_select($courseid) {
 
 // Get student users of course.
 function get_students_course($courseid) {
-    global $CFG, $USER, $DB, $PAGE;
+    global $DB;
 
     $sql = "
         SELECT u.id as userid, CONCAT(u.firstname,' ',u.lastname) as name
@@ -335,7 +334,6 @@ function get_students_by_group($groupid, $courseid) {
 
 // Get students by select.
 function get_students_by_select($jsonselectid, $courseid, $activityid, $moduletype) {
-    global $USER;
 
     $result = array();
     $students = array();
@@ -414,7 +412,7 @@ function if_student_concern_to_groups($userid, $courseid) {
 
 // Return cards.
 function get_cards($activityid, $moduletype, $courseid, $groupid) {
-    global $CFG, $USER, $DB, $PAGE;
+    global $USER, $DB;
 
     $data = array();
 
@@ -466,7 +464,7 @@ function get_cards($activityid, $moduletype, $courseid, $groupid) {
 
 // Add new card with/witout users.
 function add_new_card($activityid, $moduletype, $selectgroupid, $users = array(), $courseid) {
-    global $CFG, $USER, $DB, $PAGE;
+    global $USER, $DB;
 
     $teamwork = $DB->get_record('teamwork', array('moduleid' => $activityid, 'type' => $moduletype));
     if (!empty($teamwork)) {
@@ -523,7 +521,7 @@ function add_new_card($activityid, $moduletype, $selectgroupid, $users = array()
 }
 
 function add_comments_to_assign($comment) {
-    global $DB, $CFG;
+    global $DB;
 
     $submission = $DB->get_record('assign_submission', array('id' => $comment->itemid));
 
