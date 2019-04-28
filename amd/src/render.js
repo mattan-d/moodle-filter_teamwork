@@ -1,12 +1,9 @@
-define(['core/yui', 'filter_teamwork/popup', 'filter_teamwork/ajax', 'filter_teamwork/skin'], function (Y, popup, ajax, skin) {
+define(['core/yui', 'filter_teamwork/popup', 'filter_teamwork/skin', 'core/ajax'], function (Y, popup, skin, Ajax) {
     `use strict`;
 
     let render = {
 
-        url: '/filter/teamwork/ajax/ajax.php',
-
         data: '',
-
         sesskey: M.cfg.sesskey,
 
         // Set default data.
@@ -29,69 +26,67 @@ define(['core/yui', 'filter_teamwork/popup', 'filter_teamwork/ajax', 'filter_tea
 
         // Open main block.
         mainBlock: function (searchInit) {
-            this.data.method = `render_teamwork_html`;
-            Y.io(M.cfg.wwwroot + this.url, {
-                method: 'POST',
-                data: this.data,
-                headers: {
 
-                },
-                on: {
-                    success: function (id, response) {
-                        let result = JSON.parse(response.responseText);
-                        skin.shadow = result.shadow;
-                        skin.content = result.content;
-                        skin.show();
-                        searchInit();
-                    },
-                    failure: function () {
-                        popup.error();
-                    }
+            var promises = Ajax.call([{
+                methodname: 'render_teamwork_html',
+                args: {
+                    courseid: this.data.courseid,
+                    activityid: this.data.activityid,
+                    moduletype: this.data.moduletype,
+                    selectgroupid: this.data.selectgroupid
                 }
+            }]);
+
+            promises[0].done(function(response) {
+                let result = JSON.parse(response.result);
+                skin.shadow = result.shadow;
+                skin.content = result.content;
+                skin.show();
+                searchInit();
+            }).fail(function(ex) {
+                popup.error();
             });
         },
 
         studentList: function () {
 
             const targetBlock = document.querySelector(`#studentList`);
-            this.data.method = `render_student_list`;
-
-            Y.io(M.cfg.wwwroot + this.url, {
-                method: 'POST',
-                data: this.data,
-                headers: {
-
-                },
-                on: {
-                    success: function (id, response) {
-                        let result = JSON.parse(response.responseText);
-                        targetBlock.innerHTML = result.content;
-                    },
-                    failure: function () {
-                        popup.error();
-                    }
+            var promises = Ajax.call([{
+                methodname: 'render_student_list',
+                args: {
+                    courseid: this.data.courseid,
+                    activityid: this.data.activityid,
+                    moduletype: this.data.moduletype,
+                    selectgroupid: this.data.selectgroupid
                 }
+            }]);
+
+            promises[0].done(function(response) {
+                let result = JSON.parse(response.result);
+                targetBlock.innerHTML = result.content;
+            }).fail(function(ex) {
+                popup.error();
             });
         },
 
         teamsCard: function () {
 
             const targetBlock = document.querySelector(`#teamsCard`);
-            this.data.method = `render_teams_card`;
-
-            Y.io(M.cfg.wwwroot + this.url, {
-                method: 'POST',
-                data: this.data,
-                headers: {},
-                on: {
-                    success: function (id, response) {
-                        let result = JSON.parse(response.responseText);
-                        targetBlock.innerHTML = result.content;
-                    },
-                    failure: function () {
-                        popup.error();
-                    }
+            var promises = Ajax.call([{
+                methodname: 'render_teams_card',
+                args: {
+                    courseid: this.data.courseid,
+                    activityid: this.data.activityid,
+                    moduletype: this.data.moduletype,
+                    selectgroupid: this.data.selectgroupid
                 }
+            }]);
+
+            promises[0].done(function(response) {
+                let result = JSON.parse(response.result);
+                targetBlock.innerHTML = result.content;
+            }).fail(function(ex) {
+                popup.error();
             });
         }
 

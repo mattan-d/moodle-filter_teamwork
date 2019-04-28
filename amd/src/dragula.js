@@ -21,9 +21,9 @@ define(['filter_teamwork/ajax', 'filter_teamwork/render'], function (ajax, rende
         });
 
         ajax.data = {
-            draguserid: draguserid,
             method: 'drag_student_card',
-            newTeams: JSON.stringify(allTeams),
+            draguserid: draguserid,
+            newteamspost: JSON.stringify(allTeams),
             activityid: render.data.activityid,
             moduletype: render.data.moduletype,
             courseid: render.data.courseid,

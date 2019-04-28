@@ -2,8 +2,9 @@ define([
     'core/yui',
     'filter_teamwork/popup',
     'filter_teamwork/loading',
+    'core/ajax'
 
-], function (Y, popup, loadingIcon) {
+], function (Y, popup, loadingIcon, Ajax) {
     `use strict`;
 
     let ajax = {
@@ -11,97 +12,69 @@ define([
         url: '/filter/teamwork/ajax/ajax.php',
 
         data: '',
-
         sesskey: M.cfg.sesskey,
 
         send: function () {
-            this.data.sesskey = this.sesskey;
 
-            Y.io(M.cfg.wwwroot + this.url, {
-                method: 'POST',
-                data: this.data,
-                headers: {},
-                on: {
-                    success: function (id, response) {
-                    },
-                    failure: function () {
-                        popup.error();
-                    }
-                }
+            var methodname = this.data.method;
+            delete this.data.method;
+
+            var promises = Ajax.call([{
+                methodname: methodname,
+                args: this.data
+            }]);
+
+            promises[0].done(function (response) {
+            }).fail(function (ex) {
+                popup.error();
             });
-
         },
 
         run: function (callback) {
-            this.data.sesskey = this.sesskey;
+
             loadingIcon.show();
-            Y.io(M.cfg.wwwroot + this.url, {
-                method: 'POST',
-                data: this.data,
-                headers: {},
-                on: {
-                    success: function (id, response) {
-                        loadingIcon.remove();
-                        let result = JSON.parse(response.responseText);
-                        if (result.error) {
-                            popup.textError = result.errormsg;
-                            popup.error();
-                            return;
-                        }
-                        if (callback){callback()};
 
-                    },
-                    failure: function () {
-                        popup.error();
-                    }
+            var methodname = this.data.method;
+            delete this.data.method;
+
+            var promises = Ajax.call([{
+                methodname: methodname,
+                args: this.data
+            }]);
+
+            promises[0].done(function (response) {
+                loadingIcon.remove();
+                let result = JSON.parse(response.result);
+                if (result.error) {
+                    popup.textError = result.errormsg;
+                    popup.error();
+                    return;
                 }
+                if (callback) {
+                    callback()
+                };
+            }).fail(function (ex) {
+                popup.error();
             });
-
         },
 
         runPopup: function () {
 
-            let result;
-            this.data.sesskey = this.sesskey;
+            var methodname = this.data.method;
+            delete this.data.method;
 
-            Y.io(M.cfg.wwwroot + this.url, {
-                method: 'POST',
-                data: this.data,
-                headers: {},
-                on: {
-                    success: function (id, response) {
-                        let result = JSON.parse(response.responseText);
-                        popup.textHead = result.header;
-                        popup.text = result.content;
-                        popup.show();
-                    },
-                    failure: function () {
-                        popup.error();
-                    }
-                }
-            });
+            var promises = Ajax.call([{
+                methodname: methodname,
+                args: this.data
+            }]);
 
-        },
-
-        setHTML: function () {
-            this.data.sesskey = this.sesskey;
-            const targetBlock = document.querySelector(this.data.target_block);
-            loadingIcon.show();
-            Y.io(M.cfg.wwwroot + this.url, {
-                method: 'POST',
-                data: this.data,
-                headers: {},
-                on: {
-                    success: function (id, response) {
-                        loadingIcon.remove();
-                        popup.remove();
-                        let result = JSON.parse(response.responseText);
-                        targetBlock.innerHTML = result.content;
-                    },
-                    failure: function () {
-                        popup.error();
-                    }
-                }
+            promises[0].done(function (response) {
+                let result = JSON.parse(response.result);
+                popup.textHead = result.header;
+                popup.text = result.content;
+                popup.show();
+            }).fail(function (ex) {
+                popup.error();
             });
         },
 

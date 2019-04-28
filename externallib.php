@@ -37,7 +37,6 @@ class filter_teamwork_external extends external_api {
 
     public static function render_teamwork_html_parameters() {
         return new external_function_parameters(
-
                 array(
                         'courseid' => new external_value(PARAM_INT, 'courseid int', VALUE_DEFAULT, null),
                         'activityid' => new external_value(PARAM_INT, 'activityid int', VALUE_DEFAULT, null),
@@ -50,7 +49,7 @@ class filter_teamwork_external extends external_api {
     public static function render_teamwork_html_returns() {
         return new external_single_structure(
                 array(
-                        'result' => new external_value(PARAM_TEXT, 'result json'),
+                        'result' => new external_value(PARAM_RAW, 'result json'),
                 )
         );
     }
@@ -111,7 +110,7 @@ class filter_teamwork_external extends external_api {
     public static function render_teams_card_returns() {
         return new external_single_structure(
                 array(
-                        'result' => new external_value(PARAM_TEXT, 'result json'),
+                        'result' => new external_value(PARAM_RAW, 'result json'),
                 )
         );
     }
@@ -140,7 +139,6 @@ class filter_teamwork_external extends external_api {
 
     public static function render_student_list_parameters() {
         return new external_function_parameters(
-
                 array(
                         'courseid' => new external_value(PARAM_INT, 'courseid int', VALUE_DEFAULT, null),
                         'activityid' => new external_value(PARAM_INT, 'activityid int', VALUE_DEFAULT, null),
@@ -153,7 +151,7 @@ class filter_teamwork_external extends external_api {
     public static function render_student_list_returns() {
         return new external_single_structure(
                 array(
-                        'result' => new external_value(PARAM_TEXT, 'result json'),
+                        'result' => new external_value(PARAM_RAW, 'result json'),
                 )
         );
     }
@@ -189,7 +187,7 @@ class filter_teamwork_external extends external_api {
     public static function render_student_settings_popup_returns() {
         return new external_single_structure(
                 array(
-                        'result' => new external_value(PARAM_TEXT, 'result json'),
+                        'result' => new external_value(PARAM_RAW, 'result json'),
                 )
         );
     }
@@ -260,7 +258,7 @@ class filter_teamwork_external extends external_api {
     public static function set_teamwork_enable_returns() {
         return new external_single_structure(
                 array(
-                        'result' => new external_value(PARAM_TEXT, 'result json'),
+                        'result' => new external_value(PARAM_RAW, 'result json'),
                 )
         );
     }
@@ -312,12 +310,11 @@ class filter_teamwork_external extends external_api {
     public static function set_access_to_student_returns() {
         return new external_single_structure(
                 array(
-                        'result' => new external_value(PARAM_TEXT, 'result json'),
+                        'result' => new external_value(PARAM_RAW, 'result json'),
                 )
         );
     }
 
-    //TODO remove $access
     public static function set_access_to_student($access, $activityid, $moduletype) {
         global $DB;
 
@@ -343,7 +340,6 @@ class filter_teamwork_external extends external_api {
 
     public static function add_new_card_parameters() {
         return new external_function_parameters(
-
                 array(
                         'courseid' => new external_value(PARAM_INT, 'courseid int', VALUE_DEFAULT, null),
                         'activityid' => new external_value(PARAM_INT, 'activityid int', VALUE_DEFAULT, null),
@@ -356,7 +352,7 @@ class filter_teamwork_external extends external_api {
     public static function add_new_card_returns() {
         return new external_single_structure(
                 array(
-                        'result' => new external_value(PARAM_TEXT, 'result json'),
+                        'result' => new external_value(PARAM_RAW, 'result json'),
                 )
         );
     }
@@ -375,7 +371,6 @@ class filter_teamwork_external extends external_api {
 
     public static function delete_card_parameters() {
         return new external_function_parameters(
-
                 array(
                         'teamid' => new external_value(PARAM_INT, 'teamid int', VALUE_DEFAULT, null),
                 )
@@ -385,7 +380,7 @@ class filter_teamwork_external extends external_api {
     public static function delete_card_returns() {
         return new external_single_structure(
                 array(
-                        'result' => new external_value(PARAM_TEXT, 'result json'),
+                        'result' => new external_value(PARAM_RAW, 'result json'),
                 )
         );
     }
@@ -403,7 +398,6 @@ class filter_teamwork_external extends external_api {
 
     public static function show_random_popup_parameters() {
         return new external_function_parameters(
-
                 array()
         );
     }
@@ -411,7 +405,7 @@ class filter_teamwork_external extends external_api {
     public static function show_random_popup_returns() {
         return new external_single_structure(
                 array(
-                        'result' => new external_value(PARAM_TEXT, 'result json'),
+                        'result' => new external_value(PARAM_RAW, 'result json'),
                 )
         );
     }
@@ -434,7 +428,6 @@ class filter_teamwork_external extends external_api {
 
     public static function set_random_team_parameters() {
         return new external_function_parameters(
-
                 array(
                         'numberofstudent' => new external_value(PARAM_INT, 'number of student int', VALUE_DEFAULT, null),
                         'courseid' => new external_value(PARAM_INT, 'courseid int', VALUE_DEFAULT, null),
@@ -448,7 +441,7 @@ class filter_teamwork_external extends external_api {
     public static function set_random_team_returns() {
         return new external_single_structure(
                 array(
-                        'result' => new external_value(PARAM_TEXT, 'result json'),
+                        'result' => new external_value(PARAM_RAW, 'result json'),
                 )
         );
     }
@@ -485,7 +478,6 @@ class filter_teamwork_external extends external_api {
 
     public static function set_new_team_name_parameters() {
         return new external_function_parameters(
-
                 array(
                         'cardid' => new external_value(PARAM_INT, 'cardid int', VALUE_DEFAULT, null),
                         'cardname' => new external_value(PARAM_TEXT, 'cardname text', VALUE_DEFAULT, null),
@@ -496,7 +488,7 @@ class filter_teamwork_external extends external_api {
     public static function set_new_team_name_returns() {
         return new external_single_structure(
                 array(
-                        'result' => new external_value(PARAM_TEXT, 'result json'),
+                        'result' => new external_value(PARAM_RAW, 'result json'),
                 )
         );
     }
@@ -532,7 +524,7 @@ class filter_teamwork_external extends external_api {
     public static function drag_student_card_returns() {
         return new external_single_structure(
                 array(
-                        'result' => new external_value(PARAM_TEXT, 'result json'),
+                        'result' => new external_value(PARAM_RAW, 'result json'),
                 )
         );
     }
@@ -617,22 +609,20 @@ class filter_teamwork_external extends external_api {
         return $result;
     }
 
-    //TODO parameters changed
     public static function student_settings_popup_data_parameters() {
         return new external_function_parameters(
-
                 array(
                         'courseid' => new external_value(PARAM_INT, 'courseid int', VALUE_DEFAULT, null),
                         'activityid' => new external_value(PARAM_INT, 'activityid int', VALUE_DEFAULT, null),
                         'moduletype' => new external_value(PARAM_TEXT, 'moduletype text', VALUE_DEFAULT, null),
                         'teamnumbers' => new external_value(PARAM_INT, 'teamnumbers int', VALUE_DEFAULT, 10),
                         'teamusernumbers' => new external_value(PARAM_INT, 'teamusernumbers int', VALUE_DEFAULT, 3),
-                        'teamuserallowenddate' => new external_value(PARAM_INT, 'teamuserallowenddate int', VALUE_DEFAULT, null),
-                        'teamuserenddate' => new external_value(PARAM_INT, 'teamuserenddate int', VALUE_DEFAULT, null),
-                        'teamuserendmonth' => new external_value(PARAM_INT, 'teamuserendmonth int', VALUE_DEFAULT, null),
-                        'teamuserendyear' => new external_value(PARAM_INT, 'teamuserendyear int', VALUE_DEFAULT, null),
-                        'teamuserendhour' => new external_value(PARAM_INT, 'teamuserendhour int', VALUE_DEFAULT, null),
-                        'teamuserendminute' => new external_value(PARAM_INT, 'teamuserendminute int', VALUE_DEFAULT, null),
+                        'teamuserallowenddate' => new external_value(PARAM_RAW, 'teamuserallowenddate int', VALUE_DEFAULT, null),
+                        'teamuserenddate' => new external_value(PARAM_RAW, 'teamuserenddate int', VALUE_DEFAULT, null),
+                        'teamuserendmonth' => new external_value(PARAM_RAW, 'teamuserendmonth int', VALUE_DEFAULT, null),
+                        'teamuserendyear' => new external_value(PARAM_RAW, 'teamuserendyear int', VALUE_DEFAULT, null),
+                        'teamuserendhour' => new external_value(PARAM_RAW, 'teamuserendhour int', VALUE_DEFAULT, null),
+                        'teamuserendminute' => new external_value(PARAM_RAW, 'teamuserendminute int', VALUE_DEFAULT, null),
                 )
         );
     }
@@ -640,7 +630,7 @@ class filter_teamwork_external extends external_api {
     public static function student_settings_popup_data_returns() {
         return new external_single_structure(
                 array(
-                        'result' => new external_value(PARAM_TEXT, 'result json'),
+                        'result' => new external_value(PARAM_RAW, 'result json'),
                 )
         );
     }

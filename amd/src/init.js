@@ -13,7 +13,6 @@ define([
     const set_teamwork_enable = (courseid, activityid, moduletype, callback) => {
         ajax.data = {
             method: "set_teamwork_enable",
-            courseid: courseid,
             activityid: activityid,
             moduletype: moduletype
         };
@@ -26,7 +25,6 @@ define([
         ajax.data = {
             method: "set_access_to_student",
             access: access,
-            courseid: courseid,
             activityid: activityid,
             moduletype: moduletype
         };
@@ -41,7 +39,7 @@ define([
         callback
     ) => {
         ajax.data = {
-            method: `add_new_card`,
+            method: "add_new_card",
             courseid: courseid,
             activityid: activityid,
             moduletype: moduletype,
@@ -52,10 +50,7 @@ define([
 
     const delete_card = (teamid, courseid, activityid, moduletype, callback) => {
         ajax.data = {
-            method: `delete_card`,
-            courseid: courseid,
-            activityid: activityid,
-            moduletype: moduletype,
+            method: "delete_card",
             teamid: teamid
         };
         ajax.run(callback);
@@ -71,7 +66,7 @@ define([
     /* render_student_settings_popup */
     const render_student_settings_popup = (activityid, moduletype) => {
         ajax.data = {
-            method: `render_student_settings_popup`,
+            method: "render_student_settings_popup",
             activityid: activityid,
             moduletype: moduletype
         };
@@ -124,19 +119,20 @@ define([
             "input[name=teamuserallowenddate]"
         ).value;
         ajax.data = {
-            method: `student_settings_popup_data`,
-            teamNumbers: teamNumbers,
-            teamUserNumbers: teamUserNumbers,
-            teamUserendDate: teamUserendDate,
-            teamUserendMonth: teamUserendMonth,
-            teamUserendYear: teamUserendYear,
-            teamUserendHour: teamUserendHour,
-            teamUserenMinute: teamUserenMinute,
+            method: "student_settings_popup_data",
+            teamnumbers: teamNumbers,
+            teamusernumbers: teamUserNumbers,
+            teamuserenddate: teamUserendDate,
+            teamuserendmonth: teamUserendMonth,
+            teamuserendyear: teamUserendYear,
+            teamuserendhour: teamUserendHour,
+            teamuserendminute: teamUserenMinute,
             teamuserallowenddate: teamuserallowenddate,
             courseid: courseid,
             activityid: activityid,
             moduletype: moduletype
         };
+
         ajax.send();
     };
 
@@ -154,8 +150,8 @@ define([
         const numberOfStudent = target.querySelector(`#student_number`).value;
 
         ajax.data = {
-            method: `set_random_team`,
-            numberOfStudent: numberOfStudent,
+            method: "set_random_team",
+            numberofstudent: numberOfStudent,
             courseid: courseid,
             activityid: activityid,
             moduletype: moduletype,
@@ -164,11 +160,12 @@ define([
         ajax.run(callback);
     };
 
+    // Not used.
     const set_team_size = (target, callback) => {
         const numberOfStudent = target.value;
 
         ajax.data = {
-            method: `set_number_of_student_each_team`,
+            method: "set_number_of_student_each_team",
             numberOfStudent: numberOfStudent
         };
         ajax.run(callback);
@@ -194,12 +191,12 @@ define([
         const hiddenClass = `visuallyhidden`;
         const searchItem = target.value;
 
-    if (!searchItem) {
-        studentList.forEach(item => {
-            item.classList.remove(hiddenClass);
-        });
-        return;
-    }
+        if (!searchItem) {
+            studentList.forEach(item => {
+                item.classList.remove(hiddenClass);
+            });
+            return;
+        }
         let value = new RegExp(`${searchItem}`, `i`);
         studentList.forEach(item => {
             if (item.innerHTML.search(value) >= 0) {
@@ -320,7 +317,7 @@ define([
                         let text = document.querySelector('html[lang="en"]')
                             ? "choose grous"
                             : "בחר קבוצה";
-                        if (target.classList.contains(`selected`)){
+                        if (target.classList.contains(`selected`)) {
                             return;
                         }
                         target.classList.toggle(`selected`);
