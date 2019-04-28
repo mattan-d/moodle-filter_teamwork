@@ -9,8 +9,6 @@ define([
 
     let ajax = {
 
-        url: '/filter/teamwork/ajax/ajax.php',
-
         data: '',
         sesskey: M.cfg.sesskey,
 
