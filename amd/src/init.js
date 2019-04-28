@@ -144,7 +144,7 @@ define([
         selectgroupid,
         callback
     ) => {
-        while (!target.classList.contains(`teamwork-modal`)) {
+        while (!target.classList.contains("teamwork-modal")) {
             target = target.parentNode;
         }
         const numberOfStudent = target.querySelector(`#student_number`).value;
@@ -191,12 +191,12 @@ define([
         const hiddenClass = `visuallyhidden`;
         const searchItem = target.value;
 
-        if (!searchItem) {
-            studentList.forEach(item => {
-                item.classList.remove(hiddenClass);
-            });
-            return;
-        }
+    if (!searchItem) {
+        studentList.forEach(item => {
+            item.classList.remove(hiddenClass);
+        });
+        return;
+    }
         let value = new RegExp(`${searchItem}`, `i`);
         studentList.forEach(item => {
             if (item.innerHTML.search(value) >= 0) {
@@ -209,9 +209,7 @@ define([
 
     const searchInit = () => {
         // Init search for student list.
-        const searchInput = mainBlock.querySelector(
-            `input[data-handler = "search_student"]`
-        );
+        const searchInput = mainBlock.querySelector('input[data-handler = "search_student"]');
         searchInput.addEventListener("input", function (e) {
             searchStudentByName(searchInput);
         });
@@ -222,9 +220,7 @@ define([
             document.querySelectorAll("#studentList div[data-student_id]")
         );
         const hiddenClass = `visuallyhidden`;
-        const searchInput = mainBlock.querySelector(
-            `input[data-handler = "search_student"]`
-        );
+        const searchInput = mainBlock.querySelector('input[data-handler = "search_student"]');
 
         searchInput.value = ``;
         studentList.forEach(item => {
@@ -262,10 +258,10 @@ define([
 
                     // Close popups.
                     if (
-                        target.classList.contains(`close_popup`) ||
-                        target.classList.contains(`teamwork-modal_close`)
+                        target.classList.contains("close_popup") ||
+                        target.classList.contains("teamwork-modal_close")
                     ) {
-                        if (target.classList.contains(`stop-close`)) {
+                        if (target.classList.contains("stop-close")) {
                             return;
                         }
                         popup.remove();

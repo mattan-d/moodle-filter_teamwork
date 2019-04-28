@@ -33,12 +33,7 @@ define('FILTER_TEAMWORK_USERS_IN_GROUP', '10');
 function get_module_name($activityid) {
     global $DB;
 
-    $sql = "SELECT m.name 
-        FROM {course_modules} AS cm
-        LEFT JOIN {modules} AS m ON(cm.module=m.id)
-        WHERE cm.id=?
-    ";
-
+    $sql = "SELECT m.name FROM {course_modules} cm LEFT JOIN {modules} m ON(cm.module=m.id) WHERE cm.id=?";
     $activity = $DB->get_record_sql($sql, array($activityid));
 
     if (!empty($activity)) {
@@ -62,12 +57,10 @@ function get_mod_events_members($activityid, $userid, $mod) {
 
         $teamgroup = $DB->get_records('teamwork_groups', array('teamworkid' => $teamwork->id));
         foreach ($teamgroup as $group) {
-            $sql = "
-                SELECT tm.userid, CONCAT(u.firstname,' ',u.lastname) AS name
-                FROM {teamwork_members} AS tm
-                LEFT JOIN {user} AS u ON(u.id=tm.userid)        
-                WHERE tm.teamworkgroupid=?
-            ";
+            $sql =
+                    "SELECT tm.userid, CONCAT(u.firstname,' ',u.lastname) name
+                    FROM {teamwork_members} tm
+                    LEFT JOIN {user} u ON(u.id=tm.userid) WHERE tm.teamworkgroupid=?";
 
             $users = $DB->get_records_sql($sql, array($group->id));
             $data[] = $users;
@@ -296,8 +289,7 @@ function get_students_course($courseid) {
         INNER JOIN {context} ct ON ct.id = ra.contextid
         INNER JOIN {course} c ON c.id = ct.instanceid
         INNER JOIN {role} r ON r.id = ra.roleid
-        WHERE r.shortname=? AND c.id=?    
-    ";
+        WHERE r.shortname=? AND c.id=?";
     $students = $DB->get_records_sql($sql, array('student', $courseid));
 
     return array_values($students);
@@ -422,10 +414,9 @@ function get_cards($activityid, $moduletype, $courseid, $groupid) {
         foreach ($teamgroup as $group) {
             $sql = "
                 SELECT tm.userid, CONCAT(u.firstname,' ',u.lastname) AS name
-                FROM {teamwork_members} AS tm
-                LEFT JOIN {user} AS u ON(u.id=tm.userid)        
-                WHERE tm.teamworkgroupid=?
-            ";
+                FROM {teamwork_members} tm
+                LEFT JOIN {user} u ON(u.id=tm.userid)
+                WHERE tm.teamworkgroupid=?";
             $users = $DB->get_records_sql($sql, array($group->id));
 
             $tmp = array(

@@ -3,7 +3,7 @@ define(['filter_teamwork/ajax', 'filter_teamwork/render'], function (ajax, rende
 
     const renderPageAfterDrag = (el, callback) => {
 
-        const allTeamsBlocks = Array.from(document.querySelectorAll(`div[data-team_id]`));
+        const allTeamsBlocks = Array.from(document.querySelectorAll('div[data-team_id]'));
         const allTeams = [];
         const draguserid = el.dataset.student_id;
 
@@ -39,10 +39,10 @@ define(['filter_teamwork/ajax', 'filter_teamwork/render'], function (ajax, rende
         let maxCount = source.dataset.max_count;
 
         if (target.childElementCount === maxCount) {
-            target.classList.add(`stop-drag`);
+            target.classList.add('stop-drag');
         }
         if (source.childElementCount < maxCount) {
-            source.classList.remove(`stop-drag`);
+            source.classList.remove('stop-drag');
         }
 
         renderPageAfterDrag(el, function () {
@@ -58,16 +58,16 @@ define(['filter_teamwork/ajax', 'filter_teamwork/render'], function (ajax, rende
         startDrag: function () {
             dragula({
                 isContainer: function (el) {
-                    return el.classList.contains(`draggable`);
+                    return el.classList.contains('draggable');
                 },
                 accepts: function (el, target) {
-                    if (!target.classList.contains(`stop-drag`)) {
+                    if (!target.classList.contains('stop-drag')) {
                         return target;
                     }
 
                 },
                 invalid: function (el, handle) {
-                    if (el.classList.contains(`stop-drag-item`)) {
+                    if (el.classList.contains('stop-drag-item')) {
                         return true;
                     }
                 }

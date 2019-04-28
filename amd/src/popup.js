@@ -51,9 +51,8 @@ define(['core/str'], function (str) {
                 const popup = document.createElement(`div`);
                 popup.innerHTML = `
             <span>${this.textError}</span>
-            <button class = "btn btn-error close_popup">${closeBtn}</button>
-          `;
-                popup.classList.add(`teamwork-modal`, `teamwork-modal-error`);
+            <button class = "btn btn-error close_popup">${closeBtn}</button>`;
+                popup.classList.add('teamwork-modal', 'teamwork-modal-error');
 
                 this.remove();
                 mainBlock.appendChild(popup);
@@ -62,8 +61,8 @@ define(['core/str'], function (str) {
         },
 
         remove: function () {
-            if (mainBlock.querySelector(`.teamwork-modal`)) {
-                mainBlock.querySelector(`.teamwork-modal`).remove();
+            if (mainBlock.querySelector('.teamwork-modal')) {
+                mainBlock.querySelector('.teamwork-modal').remove();
             }
         }
 

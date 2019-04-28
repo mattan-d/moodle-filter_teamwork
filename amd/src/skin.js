@@ -24,8 +24,7 @@ define(['core/str'], function (str) {
             popup.innerHTML = `
           <div class = "skin_close"></div>
           <div class = "skin_inner"></div>
-          <div class = "skin_shadow ${this.shadow}"></div>
-        `;
+          <div class = "skin_shadow ${this.shadow}"></div>`;
             const popupInner = popup.querySelector(`.skin_inner`);
             popupInner.innerHTML = this.content;
             this.remove();
