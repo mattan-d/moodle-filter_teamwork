@@ -15,16 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Allow teachers and students to create and manage "teams" from within the assignment.
- * These "teams" exist only in that specific assignment, and are used for collaborative submission of that assignment.
+ * This filter provides for teacher sharing students in teams and make groups
+ * Submissions in each team just in activity assign
  *
- * @package     filter
- * @subpackage  teamwork
- * @copyright   2019 onwards - Weizmann institute, Department of Science teaching.
- * @author      PeTeL project manager petel@weizmann.ac.il
- * @author      Devlion LTD info@devlion.co
- * @author      Nadav Kavalerchik <nadav.kavalerchik@weizmann.ac.il>
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    filter_teamwork
+ * @copyright 2019 onwards - Weizmann institute @author Devlion info@devlion.co
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
@@ -78,7 +74,8 @@ function xmldb_filter_teamwork_upgrade($oldversion) {
         $table = new xmldb_table('teamwork');
 
         // Define field teamuserallowenddate to be added to teamwork.
-        $field = new xmldb_field('teamuserallowenddate', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, '0', 'teamusernumbers');
+        $field =
+                new xmldb_field('teamuserallowenddate', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, '0', 'teamusernumbers');
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }

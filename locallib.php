@@ -15,34 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Allow teachers and students to create and manage "teams" from within the assignment.
- * These "teams" exist only in that specific assignment, and are used for collaborative submission of that assignment.
+ * This filter provides for teacher sharing students in teams and make groups
+ * Submissions in each team just in activity assign
  *
- * @package     filter
- * @subpackage  teamwork
- * @copyright   2019 onwards - Weizmann institute, Department of Science teaching.
- * @author      PeTeL project manager petel@weizmann.ac.il
- * @author      Devlion LTD info@devlion.co
- * @author      Nadav Kavalerchik <nadav.kavalerchik@weizmann.ac.il>
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    filter_teamwork
+ * @copyright 2019 onwards - Weizmann institute @author Devlion info@devlion.co
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 global $CFG;
 require_once($CFG->dirroot . '/group/lib.php');
 
-define('FILTER_TEAMWORK_USERS_IN_GROUP', '5');
+define('FILTER_TEAMWORK_USERS_IN_GROUP', '10');
 
 // Get module name.
 function get_module_name($activityid) {
     global $DB;
 
-    $sql = "SELECT m.name 
-        FROM {course_modules} cm
-        LEFT JOIN {modules} m ON(cm.module=m.id)
-        WHERE cm.id=?
-    ";
-
+    $sql = "SELECT m.name FROM {course_modules} cm LEFT JOIN {modules} m ON(cm.module=m.id) WHERE cm.id=?";
     $activity = $DB->get_record_sql($sql, array($activityid));
 
     if (!empty($activity)) {
@@ -66,12 +57,10 @@ function get_mod_events_members($activityid, $userid, $mod) {
 
         $teamgroup = $DB->get_records('teamwork_groups', array('teamworkid' => $teamwork->id));
         foreach ($teamgroup as $group) {
-            $sql = "
-                SELECT tm.userid, CONCAT(u.firstname,' ',u.lastname) name
-                FROM {teamwork_members} tm
-                LEFT JOIN {user} u ON(u.id=tm.userid) 
-                WHERE tm.teamworkgroupid=?
-            ";
+            $sql =
+                    "SELECT tm.userid, CONCAT(u.firstname,' ',u.lastname) name
+                    FROM {teamwork_members} tm
+                    LEFT JOIN {user} u ON(u.id=tm.userid) WHERE tm.teamworkgroupid=?";
 
             $users = $DB->get_records_sql($sql, array($group->id));
             $data[] = $users;
@@ -164,7 +153,7 @@ function return_data_for_student_to_html($activityid, $moduletype, $courseid, $j
 
 // If team block enable.
 function if_teamwork_enable($activityid) {
-    global $CFG, $USER, $DB, $PAGE;
+    global $DB;
 
     $teamwork = $DB->get_record('teamwork', array('moduleid' => $activityid, 'type' => get_module_name($activityid)));
     if (!empty($teamwork) && $teamwork->active == 1) {
@@ -176,7 +165,7 @@ function if_teamwork_enable($activityid) {
 
 // If access to student.
 function if_access_to_student($activityid) {
-    global $CFG, $USER, $DB, $PAGE;
+    global $DB;
 
     $teamwork = $DB->get_record('teamwork', array('moduleid' => $activityid, 'type' => get_module_name($activityid)));
     if (!empty($teamwork)) {
@@ -291,17 +280,16 @@ function view_groups_select($courseid) {
 
 // Get student users of course.
 function get_students_course($courseid) {
-    global $CFG, $USER, $DB, $PAGE;
+    global $DB;
 
     $sql = "
-        SELECT u.id userid, CONCAT(u.firstname,' ',u.lastname) name
+        SELECT u.id as userid, CONCAT(u.firstname,' ',u.lastname) as name
         FROM {user} u
         INNER JOIN {role_assignments} ra ON ra.userid = u.id
         INNER JOIN {context} ct ON ct.id = ra.contextid
         INNER JOIN {course} c ON c.id = ct.instanceid
         INNER JOIN {role} r ON r.id = ra.roleid
-        WHERE r.shortname=? AND c.id=?    
-    ";
+        WHERE r.shortname=? AND c.id=?";
     $students = $DB->get_records_sql($sql, array('student', $courseid));
 
     return array_values($students);
@@ -338,7 +326,6 @@ function get_students_by_group($groupid, $courseid) {
 
 // Get students by select.
 function get_students_by_select($jsonselectid, $courseid, $activityid, $moduletype) {
-    global $USER;
 
     $result = array();
     $students = array();
@@ -387,7 +374,7 @@ function get_students_by_select($jsonselectid, $courseid, $activityid, $modulety
     return $result;
 }
 
-// Get all students by course TODO: NOT USE.
+// Get all students by course TODO NOT USE.
 function get_all_students_by_all_group($courseid) {
     $result = array();
 
@@ -401,7 +388,7 @@ function get_all_students_by_all_group($courseid) {
     return $result;
 }
 
-// If student concern to course TODO: NOT USE.
+// If student concern to course TODO NOT USE.
 function if_student_concern_to_groups($userid, $courseid) {
     $users = get_all_students_by_all_group($courseid);
     if (!empty($users)) {
@@ -417,7 +404,7 @@ function if_student_concern_to_groups($userid, $courseid) {
 
 // Return cards.
 function get_cards($activityid, $moduletype, $courseid, $groupid) {
-    global $CFG, $USER, $DB, $PAGE;
+    global $USER, $DB;
 
     $data = array();
 
@@ -426,11 +413,10 @@ function get_cards($activityid, $moduletype, $courseid, $groupid) {
         $teamgroup = $DB->get_records('teamwork_groups', array('teamworkid' => $teamwork->id, 'groupid' => $groupid));
         foreach ($teamgroup as $group) {
             $sql = "
-                SELECT tm.userid, CONCAT(u.firstname,' ',u.lastname) name
+                SELECT tm.userid, CONCAT(u.firstname,' ',u.lastname) AS name
                 FROM {teamwork_members} tm
-                LEFT JOIN {user} u ON(u.id=tm.userid)        
-                WHERE tm.teamworkgroupid=?
-            ";
+                LEFT JOIN {user} u ON(u.id=tm.userid)
+                WHERE tm.teamworkgroupid=?";
             $users = $DB->get_records_sql($sql, array($group->id));
 
             $tmp = array(
@@ -449,6 +435,7 @@ function get_cards($activityid, $moduletype, $courseid, $groupid) {
                             $user->notdragclass = 'stop-drag-item';
                         }
                     }
+
                 }
 
                 $tmp['users'] = array_values($users);
@@ -468,7 +455,7 @@ function get_cards($activityid, $moduletype, $courseid, $groupid) {
 
 // Add new card with/witout users.
 function add_new_card($activityid, $moduletype, $selectgroupid, $users = array(), $courseid) {
-    global $CFG, $USER, $DB, $PAGE;
+    global $USER, $DB;
 
     $teamwork = $DB->get_record('teamwork', array('moduleid' => $activityid, 'type' => $moduletype));
     if (!empty($teamwork)) {
@@ -525,7 +512,7 @@ function add_new_card($activityid, $moduletype, $selectgroupid, $users = array()
 }
 
 function add_comments_to_assign($comment) {
-    global $DB, $CFG;
+    global $DB;
 
     $submission = $DB->get_record('assign_submission', array('id' => $comment->itemid));
 

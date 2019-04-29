@@ -1,109 +1,97 @@
-define(['core/yui' , 'filter_teamwork/popup', 'filter_teamwork/ajax', 'filter_teamwork/skin'], function(Y, popup, ajax, skin) {
-`use strict`;
+define(['core/yui', 'filter_teamwork/popup', 'filter_teamwork/skin', 'core/ajax'], function (Y, popup, skin, Ajax) {
+    `use strict`;
 
-  let render = {
+    let render = {
 
-    url: '/filter/teamwork/ajax/ajax.php',
+        data: '',
+        sesskey: M.cfg.sesskey,
 
-    data: '',
+        // Set default data.
+        setDefaultData: function () {
+            let sesskey = this.data.sesskey;
+            let courseid = this.data.courseid;
+            let activityid = this.data.activityid;
+            let moduletype = this.data.moduletype;
+            let selectgroupid = this.data.selectgroupid;
 
-    sesskey: M.cfg.sesskey,
+            this.data = {
+                sesskey: sesskey,
+                courseid: courseid,
+                activityid: activityid,
+                moduletype: moduletype,
+                selectgroupid: selectgroupid
+            }
 
-    //Set default data
-    setDefaultData: function(){
-        let sesskey = this.data.sesskey;
-        let courseid = this.data.courseid;
-        let activityid = this.data.activityid;
-        let moduletype = this.data.moduletype;
-        let selectgroupid = this.data.selectgroupid;
+        },
 
-        this.data = {
-            sesskey: sesskey,
-            courseid: courseid,
-            activityid: activityid,
-            moduletype: moduletype,
-            selectgroupid: selectgroupid
-        }
+        // Open main block.
+        mainBlock: function (searchInit) {
 
-    },
+            var promises = Ajax.call([{
+                methodname: 'render_teamwork_html',
+                args: {
+                    courseid: this.data.courseid,
+                    activityid: this.data.activityid,
+                    moduletype: this.data.moduletype,
+                    selectgroupid: this.data.selectgroupid
+                }
+            }]);
 
-    //Open main block
-    mainBlock: function(searchInit){
-      this.data.method = `render_teamwork_html`;
-      Y.io(M.cfg.wwwroot + this.url, {
-          method: 'POST',
-          data: this.data,
-          headers: {
-              //'Content-Type': 'application/json'
-          },
-          on: {
-              success: function (id, response) {
-                let result = JSON.parse(response.responseText);
-                // learnStat.innerHTML = result.content;
-
+            promises[0].done(function(response) {
+                let result = JSON.parse(response.result);
                 skin.shadow = result.shadow;
                 skin.content = result.content;
                 skin.show();
                 searchInit();
-              },
-              failure: function () {
+            }).fail(function(ex) {
                 popup.error();
-              }
-          }
-      });
-    },
+            });
+        },
 
+        studentList: function () {
 
-    studentList: function(){
+            const targetBlock = document.querySelector(`#studentList`);
+            var promises = Ajax.call([{
+                methodname: 'render_student_list',
+                args: {
+                    courseid: this.data.courseid,
+                    activityid: this.data.activityid,
+                    moduletype: this.data.moduletype,
+                    selectgroupid: this.data.selectgroupid
+                }
+            }]);
 
-      const targetBlock = document.querySelector(`#studentList`);
-      this.data.method = `render_student_list`;
-
-      Y.io(M.cfg.wwwroot + this.url, {
-          method: 'POST',
-          data: this.data,
-          headers: {
-              //'Content-Type': 'application/json'
-          },
-          on: {
-              success: function (id, response) {
-                let result = JSON.parse(response.responseText);
+            promises[0].done(function(response) {
+                let result = JSON.parse(response.result);
                 targetBlock.innerHTML = result.content;
-              },
-              failure: function () {
+            }).fail(function(ex) {
                 popup.error();
-              }
-          }
-      });
-    },
+            });
+        },
 
+        teamsCard: function () {
 
-    teamsCard: function(){
+            const targetBlock = document.querySelector(`#teamsCard`);
+            var promises = Ajax.call([{
+                methodname: 'render_teams_card',
+                args: {
+                    courseid: this.data.courseid,
+                    activityid: this.data.activityid,
+                    moduletype: this.data.moduletype,
+                    selectgroupid: this.data.selectgroupid
+                }
+            }]);
 
-      const targetBlock = document.querySelector(`#teamsCard`);
-      this.data.method = `render_teams_card`;
-      // this.data.sesskey = this.sesskey;
-
-      Y.io(M.cfg.wwwroot + this.url, {
-          method: 'POST',
-          data: this.data,
-          headers: {
-              //'Content-Type': 'application/json'
-          },
-          on: {
-              success: function (id, response) {
-                let result = JSON.parse(response.responseText);
+            promises[0].done(function(response) {
+                let result = JSON.parse(response.result);
                 targetBlock.innerHTML = result.content;
-              },
-              failure: function () {
+            }).fail(function(ex) {
                 popup.error();
-              }
-          }
-      });
+            });
+        }
+
     }
 
-  }
-
-  return render
+    return render
 
 });
