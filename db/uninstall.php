@@ -44,4 +44,5 @@ function xmldb_filter_teamwork_uninstall() {
         $dbman->drop_table($table);
     }
 
+    return true;
 }
