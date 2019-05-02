@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-function filter_teamwork_uninstall() {
+function xmldb_filter_teamwork_uninstall() {
     global $DB;
     $dbman = $DB->get_manager();
 
