@@ -72,3 +72,5 @@ $string['letsubmitafterteamworkenddate'] =
         'The assignment is in the "Students choose a team" mode, up to date: {$a}. At the end of the division process for the teams, the assignment will be opened.';
 $string['close'] = 'Ok';
 $string['error_message'] = 'Error in the application contact support';
+$string['please_wait'] = 'Please wait';
+$string['choose_groups'] = 'Choose groups';

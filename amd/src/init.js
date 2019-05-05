@@ -4,8 +4,9 @@ define([
     "filter_teamwork/popup",
     "filter_teamwork/render",
     "filter_teamwork/dragula",
-    "filter_teamwork/skin"
-], function (str, ajax, popup, render, drag, skin) {
+    "filter_teamwork/skin",
+    "filter_teamwork/loading"
+], function (str, ajax, popup, render, drag, skin, loading) {
     `use strict`;
 
     const mainBlock = document.querySelector(`body`);
@@ -230,6 +231,7 @@ define([
 
     return {
         init: function (courseid, activityid, moduletype, selectgroupid) {
+
             render.data = {
                 sesskey: M.cfg.sesskey,
                 courseid: courseid,
@@ -310,16 +312,16 @@ define([
                     }
                     // Handle select group.
                     if (target.dataset.handler === `select_groups`) {
-                        let text = document.querySelector('html[lang="en"]')
-                            ? "choose grous"
-                            : "בחר קבוצה";
                         if (target.classList.contains(`selected`)) {
                             return;
                         }
                         target.classList.toggle(`selected`);
-                        $('div[data-handler="open_group_selection"]').html(
-                            target.classList.contains(`selected`) ? target.innerHTML : text
-                        );
+
+                        str.get_string('choose_groups', 'filter_teamwork').done(function(s){
+                          $('div[data-handler="open_group_selection"]').html(
+                              target.classList.contains(`selected`) ? target.innerHTML : s
+                          );
+                        });
 
                         $(target)
                             .siblings()

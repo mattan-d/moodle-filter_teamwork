@@ -330,7 +330,7 @@
     .teamwork .teamwork_select-legend::after {
       content: '\f0dc';
       position: static;
-      font-family: 'Font Awesome';
+      font-family: 'FontAwesome';
       border-left: 1px solid #959595;
       display: inline-block;
       padding: 0 5px 0 8px;
@@ -767,6 +767,43 @@
               align-items: center;
       margin: 0;
       padding: 0; }
+
+.raspberry_loading {
+  position: fixed;
+  z-index: 10001;
+  width: 200px;
+  height: 200px;
+  right: calc(50% - 100px);
+  border: 1px solid #dddddd;
+  top: calc(50% - 100px);
+  background-color: white;
+  border-radius: 5px;
+  color: #3f1c7a;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 30px 0;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: normal;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-shadow: 0px 0px 10px 0px #7b7b7b;
+          box-shadow: 0px 0px 10px 0px #7b7b7b; }
+
+.raspberry_loading img {
+  width: 68%;
+  height: auto; }
 
 #glossaryfilteroverlayprogress {
   position: fixed;

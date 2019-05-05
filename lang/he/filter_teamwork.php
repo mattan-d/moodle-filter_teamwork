@@ -70,3 +70,5 @@ $string['month12'] = 'דצמבר';
 $string['letsubmitafterteamworkenddate'] = 'המטלה נמצאת במצב: "תלמידים בוחרים צוות", עד התאריך: {$a}.בסיום שלב החלוקה לצוותים, תיפתח המטלה להגשות.';
 $string['close'] = 'סגור';
 $string['error_message'] = 'שגיאת יישום צור קשר עם תמיכת טכנית';
+$string['please_wait'] = 'אנא המתן';
+$string['choose_groups'] = 'בחר קבוצה';
