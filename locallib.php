@@ -19,7 +19,7 @@
  * Submissions in each team just in activity assign
  *
  * @package    filter_teamwork
- * @copyright 2019 onwards - Weizmann institute @author Devlion info@devlion.co
+ * @copyright 2018 Devlion <info@devlion.co>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

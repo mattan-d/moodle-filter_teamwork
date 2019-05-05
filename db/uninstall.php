@@ -25,6 +25,24 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2018121202;
-$plugin->requires = 2017050500;
-$plugin->component = 'filter_teamwork';
+function xmldb_filter_teamwork_uninstall() {
+    global $DB;
+    $dbman = $DB->get_manager();
+
+    if ($dbman->table_exists('teamwork')) {
+        $table = new xmldb_table('teamwork');
+        $dbman->drop_table($table);
+    }
+
+    if ($dbman->table_exists('teamwork_groups')) {
+        $table = new xmldb_table('teamwork_groups');
+        $dbman->drop_table($table);
+    }
+
+    if ($dbman->table_exists('teamwork_members')) {
+        $table = new xmldb_table('teamwork_members');
+        $dbman->drop_table($table);
+    }
+
+    return true;
+}

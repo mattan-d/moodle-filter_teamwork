@@ -50,7 +50,7 @@ define([
                 }
                 if (callback) {
                     callback()
-                };
+                }
             }).fail(function (ex) {
                 popup.error();
             });

@@ -37,13 +37,13 @@ define(['core/yui', 'filter_teamwork/popup', 'filter_teamwork/skin', 'core/ajax'
                 }
             }]);
 
-            promises[0].done(function(response) {
+            promises[0].done(function (response) {
                 let result = JSON.parse(response.result);
                 skin.shadow = result.shadow;
                 skin.content = result.content;
                 skin.show();
                 searchInit();
-            }).fail(function(ex) {
+            }).fail(function (ex) {
                 popup.error();
             });
         },
@@ -61,10 +61,10 @@ define(['core/yui', 'filter_teamwork/popup', 'filter_teamwork/skin', 'core/ajax'
                 }
             }]);
 
-            promises[0].done(function(response) {
+            promises[0].done(function (response) {
                 let result = JSON.parse(response.result);
                 targetBlock.innerHTML = result.content;
-            }).fail(function(ex) {
+            }).fail(function (ex) {
                 popup.error();
             });
         },
@@ -82,10 +82,10 @@ define(['core/yui', 'filter_teamwork/popup', 'filter_teamwork/skin', 'core/ajax'
                 }
             }]);
 
-            promises[0].done(function(response) {
+            promises[0].done(function (response) {
                 let result = JSON.parse(response.result);
                 targetBlock.innerHTML = result.content;
-            }).fail(function(ex) {
+            }).fail(function (ex) {
                 popup.error();
             });
         }
