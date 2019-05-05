@@ -1,8 +1,86 @@
 .display_none {
   display: none !important; }
 
+.skin {
+  position: fixed;
+  overflow: hidden;
+  z-index: 10000;
+  width: 80%;
+  left: 10%;
+  top: 12vh;
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 10px 0 #7b7b7b;
+          box-shadow: 0 0 10px 0 #7b7b7b;
+  bottom: unset;
+  min-height: 30vh; }
+
+.skin_shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(165, 165, 165, 0.4);
+  -webkit-transition: .4s ease-in-out;
+  transition: .4s ease-in-out;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0; }
+
+.skin_shadow.skin_show {
+  -webkit-transform: scaleY(1);
+          transform: scaleY(1); }
+
+.skin_shadow.skin_hide {
+  -webkit-transform: scaleY(0);
+          transform: scaleY(0); }
+
+.teamwork.active + .skin_shadow {
+  top: 100%; }
+
+.skin_inner {
+  padding: 10px 20px; }
+
+.skin_close {
+  margin-left: auto; }
+
+.skin_close {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  right: 25px;
+  top: 25px;
+  width: 33px;
+  height: 33px;
+  -webkit-transition: .5s;
+  transition: .5s;
+  background: none; }
+
+.skin_close:hover {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg); }
+
+.skin_close:before,
+.skin_close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 32px;
+  width: 2px;
+  background-color: #441e84; }
+
+.skin_close:before {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg); }
+
+.skin_close:after {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg); }
+
 .teamwork .btn-primary {
   cursor: pointer;
+  -webkit-transition: .2s;
   transition: .2s; }
 
 .teamwork .btn {
@@ -15,6 +93,7 @@
   background-color: #3f1c7a;
   border-radius: 5px;
   margin-top: 6px;
+  -webkit-transition: .2s;
   transition: .2s; }
   .teamwork .btn-error {
     color: #dc3545;
@@ -32,7 +111,7 @@
     display: inline-block;
     font: 400 24px "assistant";
     margin-left: 68px;
-    padding: 0px 15px;
+    padding: 0 15px;
     padding-bottom: 4px;
     margin-top: -9px; }
   .teamwork .btn--left {
@@ -45,8 +124,8 @@
     margin-top: 25px;
     padding: 0 50px;
     line-height: 40px;
-    background-color: #333333;
-    border-color: #333333; }
+    background-color: #333;
+    border-color: #333; }
   .teamwork .btn--white {
     font: 400 24px/40px "assistant";
     padding: 0 50px;
@@ -70,12 +149,14 @@
     border-color: #9f8dbc; }
 
 .teamwork .btns-popup {
+  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   padding: 31px 14px;
   padding-bottom: 9px;
-  -ms-flex-pack: end;
-      justify-content: flex-end; }
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end; }
   .teamwork .btns-popup .btn {
     padding: 0 24px;
     font-weight: 400; }
@@ -95,34 +176,42 @@
 
 .teamwork-modal {
   position: fixed;
+  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   overflow: hidden;
-  -ms-flex-direction: column;
-      flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   z-index: 10001;
   width: 561px;
   left: calc(50% - 280px);
   top: 20vh;
   background-color: #fff;
   border-radius: 5px;
-  box-shadow: 0 0 10px 0 #7b7b7b;
+  -webkit-box-shadow: 0 0 10px 0 #7b7b7b;
+          box-shadow: 0 0 10px 0 #7b7b7b;
   bottom: unset;
   min-height: 30vh; }
 
 .teamwork-modal-error {
   background-color: #fff5f6;
-  -ms-flex-align: center;
-      align-items: center; }
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
   .teamwork-modal-error span {
     color: #dc3545;
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     height: 24vh;
-    -ms-flex-align: center;
-        align-items: center;
-    -ms-flex-pack: center;
-        justify-content: center; }
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
 
 .teamwork-modal-error-abs {
   position: absolute;
@@ -133,14 +222,19 @@
   z-index: 100;
   text-align: center;
   background-color: rgba(255, 230, 230, 0.9);
+  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
-      flex-direction: column;
-  -ms-flex-pack: center;
-      justify-content: center;
-  -ms-flex-align: center;
-      align-items: center; }
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
   .teamwork-modal-error-abs span {
     color: #dc3545; }
 
@@ -148,6 +242,7 @@
   text-align: center; }
 
 .teamwork-modal_header {
+  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   padding: 0 12px;
@@ -169,12 +264,15 @@
   top: 9px;
   width: 33px;
   height: 33px;
+  -webkit-transition: .5s;
   transition: .5s; }
 
 .teamwork-modal_close:hover {
-  transform: rotate(180deg); }
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg); }
 
-.teamwork-modal_close:before, .teamwork-modal_close:after {
+.teamwork-modal_close:before,
+.teamwork-modal_close:after {
   position: absolute;
   left: 15px;
   content: ' ';
@@ -183,26 +281,32 @@
   background-color: #fff; }
 
 .teamwork-modal_close:before {
-  transform: rotate(45deg); }
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg); }
 
 .teamwork-modal_close:after {
-  transform: rotate(-45deg); }
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg); }
 
 .warning_wrap {
   height: 17vh;
   padding-top: 70px; }
 
 .teamwork {
+  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   padding: 10px 0;
   height: 80vh;
   font: 400 1rem "assistant"; }
   .teamwork .teamwork_studets_wrap {
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-direction: column;
-        flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     width: 254px;
     margin-right: 10px;
     padding: 10px;
@@ -213,6 +317,7 @@
   .teamwork .teamwork_select-legend {
     cursor: pointer;
     position: relative;
+    -webkit-transition: .3s;
     transition: .3s;
     margin-left: auto;
     border: 1px solid #959595;
@@ -220,7 +325,8 @@
     padding: 0 5px;
     border-radius: 5px; }
     .teamwork .teamwork_select-legend:active {
-      transform: translateY(5px); }
+      -webkit-transform: translateY(5px);
+              transform: translateY(5px); }
     .teamwork .teamwork_select-legend::after {
       content: '\f0dc';
       position: static;
@@ -252,11 +358,15 @@
     margin-top: 20px;
     font: 600 18px "assistant"; }
   .teamwork .teamwork_select {
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-align: center;
-        align-items: center;
-    position: relative; }
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: relative;
+    -ms-flex-negative: 0;
+        flex-shrink: 0; }
   .teamwork select {
     width: auto;
     background-color: #fff;
@@ -265,13 +375,17 @@
     margin-left: auto; }
   .teamwork .teamwork_students {
     margin-top: 10px;
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     overflow-y: auto;
-    -ms-flex-direction: column;
-        flex-direction: column;
-    -ms-flex-positive: 1;
-        flex-grow: 1;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
     border: 1px solid #959595;
     margin-bottom: 5px; }
   .teamwork .teamwork_student {
@@ -282,18 +396,22 @@
         flex-shrink: 0;
     white-space: nowrap;
     overflow: hidden;
+    -webkit-transition: .2s;
     transition: .2s;
     border-radius: 2px;
     border: 1px solid transparent; }
     .teamwork .teamwork_student:hover {
-      border-color: #40167C;
-      box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+      border-color: #40167c;
+      -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+              box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
       text-shadow: 0 0 black; }
   .teamwork .teamwork_search {
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-align: center;
-        align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     -ms-flex-negative: 0;
         flex-shrink: 0; }
   .teamwork .teamwork_search-label {
@@ -303,41 +421,51 @@
     border-radius: 5px;
     line-height: 30px;
     width: 10px;
-    -ms-flex-positive: 1;
-        flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
     margin: 0 5px;
     padding: 0 5px; }
   .teamwork .teamwork_content {
     position: relative;
     overflow: hidden;
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-direction: column;
-        flex-direction: column;
-    -ms-flex-positive: 1;
-        flex-grow: 1;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
     padding: 10px 20px 20px;
     border-radius: 5px;
     border: 1px solid #3f1c7a; }
   .teamwork .teamwork_controls {
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-negative: 0;
         flex-shrink: 0; }
   .teamwork .teamwork_toggle-btn {
     cursor: pointer;
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     border-radius: 5px;
     padding: 0 10px;
     margin-right: 20px;
     border: 1px solid #3f1c7a;
-    -ms-flex-align: center;
-        align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     background-color: #fff;
+    -webkit-transition: .2s;
     transition: .2s; }
     .teamwork .teamwork_toggle-btn:hover {
-      box-shadow: 0px 0px 3px 2px #b1b1b1; }
+      -webkit-box-shadow: 0 0 3px 2px #b1b1b1;
+              box-shadow: 0 0 3px 2px #b1b1b1; }
   .teamwork .teamwork_toggle-btn[data-handler="teamwork_toggle"] {
     position: fixed;
     z-index: 9999; }
@@ -353,10 +481,12 @@
     background-color: #dc3545;
     border-radius: 10px;
     margin-right: 10px;
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-align: center;
-        align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     padding: 0 5px; }
     .teamwork .teamwork_toggle .teamwork_pin {
       width: 12px;
@@ -364,50 +494,58 @@
       position: relative;
       background-color: #fff;
       border-radius: 50%;
+      -webkit-transition: .2s;
       transition: .2s;
-      transform: translateX(-8px); }
+      -webkit-transform: translateX(8px);
+              transform: translateX(8px); }
   .teamwork .teamwork_toggle-btn.active .teamwork_toggle {
     background-color: #28a745; }
   .teamwork .teamwork_toggle-btn.active .teamwork_pin {
-    transform: translateX(0); }
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
   .teamwork .teamwork_toggle-text {
     color: #3f1c7a;
     font: 400 16px/40px "assistant"; }
   .teamwork .teamwork_access span {
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-align: center;
-        align-items: center; }
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
   .teamwork .teamwork_btns {
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex; }
     .teamwork .teamwork_btns button {
       margin-right: 10px; }
   .teamwork .teamwork_teams {
-    -ms-flex-positive: 1;
-        flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
     max-height: 92%;
     overflow-y: auto;
     overflow-x: hidden;
     margin-top: 20px;
     padding: 20px 30px;
     border: 1px solid #959595;
-    display: -ms-grid;
     display: grid;
     grid-gap: 30px;
-    -ms-grid-columns: (auto)[4];
-        grid-template-columns: repeat(4, auto); }
+    grid-template-columns: repeat(4, auto); }
   .teamwork .teamwork_team {
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-direction: column;
-        flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     height: 300px;
     max-width: 300px;
-    border: 1px solid #A1A1A1;
+    border: 1px solid #a1a1a1;
     border-radius: 5px;
     padding: 10px;
-    background-color: #EBEBEB; }
+    background-color: #ebebeb; }
   .teamwork .teamwork_team-close {
     cursor: pointer;
     position: absolute;
@@ -415,12 +553,14 @@
     top: -25px;
     width: 30px;
     height: 30px;
+    -webkit-transition: .5s;
     transition: .5s;
     border: 1px solid #3f1c7a;
     border-radius: 50%;
     background-color: #fff; }
     .teamwork .teamwork_team-close:hover {
-      transform: rotate(180deg); }
+      -webkit-transform: rotate(180deg);
+              transform: rotate(180deg); }
   .teamwork .teamwork_team-close::before,
   .teamwork .teamwork_team-close::after {
     position: absolute;
@@ -434,13 +574,18 @@
     width: 2px;
     background-color: #441e84; }
   .teamwork .teamwork_team-close::before {
-    transform: rotate(45deg); }
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg); }
   .teamwork .teamwork_team-close::after {
-    transform: rotate(-45deg); }
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg); }
   .teamwork .teamwork__team-header {
     position: relative;
+    display: -webkit-box;
     display: -ms-flexbox;
-    display: flex; }
+    display: flex;
+    -ms-flex-negative: 0;
+        flex-shrink: 0; }
   .teamwork .teamwork_team-head {
     background-color: #fff;
     margin-right: auto;
@@ -448,10 +593,12 @@
     margin-left: auto;
     -ms-flex-negative: 0;
         flex-shrink: 0;
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-positive: 1;
-        flex-grow: 1; }
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1; }
     .teamwork .teamwork_team-head input {
       font: 400 16px/27px "assistant";
       background-color: #fff;
@@ -460,12 +607,16 @@
       text-align: center;
       width: 100%; }
   .teamwork .teamwork_team-inner {
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-positive: 1;
-        flex-grow: 1;
-    -ms-flex-direction: column;
-        flex-direction: column;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     margin-top: 5px;
     padding-top: 10px;
     border-radius: 5px;
@@ -474,6 +625,7 @@
   .teamwork .add_team {
     cursor: pointer;
     position: absolute;
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     bottom: 30px;
@@ -482,11 +634,15 @@
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    box-shadow: 0px 2px 6px #939393;
-    box-sizing: content-box;
+    -webkit-box-shadow: 0 2px 6px #939393;
+            box-shadow: 0 2px 6px #939393;
+    -webkit-box-sizing: content-box;
+            box-sizing: content-box;
+    -webkit-transition: .2s;
     transition: .2s; }
     .teamwork .add_team:hover {
-      box-shadow: 0px 0px 0px 4px #a080d5; }
+      -webkit-box-shadow: 0 0 0 4px #a080d5;
+              box-shadow: 0 0 0 4px #a080d5; }
   .teamwork .add_team::after,
   .teamwork .add_team::before {
     content: '';
@@ -501,7 +657,8 @@
     width: 2px;
     height: 60%; }
   .teamwork .add_team::before {
-    transform: rotate(90deg); }
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg); }
   .teamwork .visuallyhidden {
     position: absolute;
     overflow: hidden;
@@ -511,7 +668,16 @@
     margin: -1px;
     padding: 0;
     border: 0;
+    -webkit-transition: .3s;
     transition: .3s; }
+
+[dir="rtl"] .teamwork .teamwork_toggle-btn.active .teamwork_pin {
+  -webkit-transform: translateX(0);
+          transform: translateX(0); }
+
+[dir="rtl"] .teamwork .teamwork_toggle .teamwork_pin {
+  -webkit-transform: translateX(-8px);
+          transform: translateX(-8px); }
 
 .gu-mirror {
   position: fixed !important;
@@ -539,20 +705,24 @@
   padding: 5px;
   background-color: #fff;
   border-radius: 2px;
-  border: 1px solid #40167C;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  border: 1px solid #40167c;
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
   text-shadow: 0 0 black;
   overflow: hidden; }
 
 .student-setting-form {
   padding: 1.5rem 2rem; }
   .student-setting-form .input-label {
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-align: center;
-        align-items: center;
-    -ms-flex-pack: justify;
-        justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     margin: 0 auto;
     width: 100%;
     margin-bottom: 1rem; }
@@ -566,11 +736,13 @@
       display: block;
       min-height: 1.625rem;
       height: 1.7rem;
-      padding: 0rem 0.5rem;
-      box-sizing: border-box;
+      padding: 0 0.5rem;
+      -webkit-box-sizing: border-box;
+              box-sizing: border-box;
       outline: none;
       border-radius: 3px;
-      box-shadow: inset 0 0.125rem 0.125rem rgba(27, 31, 35, 0.075);
+      -webkit-box-shadow: inset 0 0.125rem 0.125rem rgba(27, 31, 35, 0.075);
+              box-shadow: inset 0 0.125rem 0.125rem rgba(27, 31, 35, 0.075);
       color: #000;
       border: 0.0831rem solid #3f1c7a; }
     .student-setting-form .input-label input:disabled,
@@ -584,12 +756,15 @@
       padding-left: 0.5rem; }
     .student-setting-form .input-label .teamuserenddate-inputs-wrapper {
       width: 73%;
+      display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-      -ms-flex-align: center;
-          align-items: center;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
       margin: 0;
       padding: 0; }
 
@@ -598,8 +773,3 @@
   top: 50%;
   width: 100%;
   text-align: center; }
-
-.teawmworkenddatemessage{
-  color: red;
-  padding: 10px 0 10px 0;
-}

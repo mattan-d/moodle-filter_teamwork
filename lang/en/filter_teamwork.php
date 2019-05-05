@@ -70,3 +70,5 @@ $string['month11'] = 'November';
 $string['month12'] = 'December';
 $string['letsubmitafterteamworkenddate'] =
         'The assignment is in the "Students choose a team" mode, up to date: {$a}. At the end of the division process for the teams, the assignment will be opened.';
+$string['close'] = 'Ok';
+$string['error_message'] = 'Error in the application contact support';

@@ -1,24 +1,11 @@
 define(['core/str'], function (str) {
     `use strict`;
 
-    let textError;
-    let closeBtn;
-
-    str.get_strings([
-        {key: 'close', component: 'local_social'},
-        {key: 'error_message', component: 'local_social'}
-    ]).done(function () {
-        textError = M.util.get_string('error_message', 'local_social');
-        closeBtn = M.util.get_string('close', 'local_social');
-    });
-
     const mainBlock = document.querySelector(`body`);
     const popup = {
 
-        // MainBlock: `body`.
         textHead: ``,
         text: ``,
-        textError: textError,
 
         show: function () {
             const popup = document.createElement(`div`);
@@ -38,33 +25,38 @@ define(['core/str'], function (str) {
         },
 
         error: function () {
+            let self = this;
+            str.get_strings([
+                {key: 'close', component: 'filter_teamwork'},
+                {key: 'error_message', component: 'filter_teamwork'}
+            ]).done(function (s) {
+              if (mainBlock.querySelector(`.teamwork-modal`)) {
+                  const errorBlock = document.createElement(`div`);
+                  errorBlock.classList.add(`teamwork-modal-error-abs`, `alert`, `alert-warning`);
+                  errorBlock.innerHTML = `
+                    <span>${s[1]}</span>
+                    <button class = "btn btn-error close_popup">${s[0]}</button>
+                  `;
+                  mainBlock.querySelector(`.teamwork-modal`).appendChild(errorBlock);
+              } else {
+                  const popup = document.createElement(`div`);
+                  popup.innerHTML = `
+                    <span>${s[1]}</span>
+                    <button class = "btn btn-error close_popup">${s[0]}</button>
+                  `;
+                  popup.classList.add('teamwork-modal', 'teamwork-modal-error');
 
-            if (mainBlock.querySelector(`.teamwork-modal`)) {
-                const errorBlock = document.createElement(`div`);
-                errorBlock.classList.add(`teamwork-modal-error-abs`, `alert`, `alert-warning`);
-                errorBlock.innerHTML = `
-          <span>${this.textError}</span>
-          <button class = "btn btn-error close_popup">${closeBtn}</button>
-        `;
-                mainBlock.querySelector(`.teamwork-modal`).appendChild(errorBlock);
-            } else {
-                const popup = document.createElement(`div`);
-                popup.innerHTML = `
-            <span>${this.textError}</span>
-            <button class = "btn btn-error close_popup">${closeBtn}</button>`;
-                popup.classList.add('teamwork-modal', 'teamwork-modal-error');
-
-                this.remove();
-                mainBlock.appendChild(popup);
-            }
-
+                  self.remove();
+                  mainBlock.appendChild(popup);
+              }
+            });
         },
 
         remove: function () {
             if (mainBlock.querySelector('.teamwork-modal')) {
                 mainBlock.querySelector('.teamwork-modal').remove();
             }
-        }
+        },
 
     };
 
