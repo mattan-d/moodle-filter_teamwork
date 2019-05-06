@@ -55,7 +55,10 @@ class filter_teamwork_external extends external_api {
     }
 
     public static function render_teamwork_html($courseid, $activityid, $moduletype, $selectgroupid) {
-        global $OUTPUT;
+        global $OUTPUT, $PAGE;
+
+        $context = context_system::instance();
+        $PAGE->set_context($context);
 
         $arrgroupid = json_decode($selectgroupid);
 
@@ -116,7 +119,10 @@ class filter_teamwork_external extends external_api {
     }
 
     public static function render_teams_card($courseid, $activityid, $moduletype, $selectgroupid) {
-        global $OUTPUT;
+        global $OUTPUT, $PAGE;
+
+        $context = context_system::instance();
+        $PAGE->set_context($context);
 
         $arrgroupid = json_decode($selectgroupid);
 
@@ -157,7 +163,10 @@ class filter_teamwork_external extends external_api {
     }
 
     public static function render_student_list($courseid, $activityid, $moduletype, $selectgroupid) {
-        global $OUTPUT;
+        global $OUTPUT, $PAGE;
+
+        $context = context_system::instance();
+        $PAGE->set_context($context);
 
         $data = array();
         $data['list_students'] = get_students_by_select($selectgroupid, $courseid, $activityid, $moduletype);
@@ -193,7 +202,10 @@ class filter_teamwork_external extends external_api {
     }
 
     public static function render_student_settings_popup($activityid, $moduletype) {
-        global $DB, $OUTPUT;
+        global $DB, $OUTPUT, $PAGE;
+
+        $context = context_system::instance();
+        $PAGE->set_context($context);
 
         // Get data from DB.
         $teamworkdata = $DB->get_record('teamwork', array('moduleid' => $activityid, 'type' => $moduletype));
@@ -264,7 +276,10 @@ class filter_teamwork_external extends external_api {
     }
 
     public static function set_teamwork_enable($activityid, $moduletype) {
-        global $USER, $DB;
+        global $USER, $DB, $PAGE;
+
+        $context = context_system::instance();
+        $PAGE->set_context($context);
 
         $teamwork = $DB->get_record('teamwork', array('moduleid' => $activityid, 'type' => $moduletype));
         if (!empty($teamwork)) {
@@ -316,7 +331,10 @@ class filter_teamwork_external extends external_api {
     }
 
     public static function set_access_to_student($access, $activityid, $moduletype) {
-        global $DB;
+        global $DB, $PAGE;
+
+        $context = context_system::instance();
+        $PAGE->set_context($context);
 
         $teamwork = $DB->get_record('teamwork', array('moduleid' => $activityid, 'type' => $moduletype));
         if (!empty($teamwork)) {
@@ -358,6 +376,10 @@ class filter_teamwork_external extends external_api {
     }
 
     public static function add_new_card($courseid, $activityid, $moduletype, $selectgroupid) {
+        global $PAGE;
+
+        $context = context_system::instance();
+        $PAGE->set_context($context);
 
         $arrgroupid = json_decode($selectgroupid);
         foreach ($arrgroupid as $id) {
@@ -386,7 +408,10 @@ class filter_teamwork_external extends external_api {
     }
 
     public static function delete_card($teamid) {
-        global $DB;
+        global $DB, $PAGE;
+
+        $context = context_system::instance();
+        $PAGE->set_context($context);
 
         $DB->delete_records('teamwork_groups', array('id' => $teamid));
         $DB->delete_records('teamwork_members', array('teamworkgroupid' => $teamid));
@@ -411,7 +436,10 @@ class filter_teamwork_external extends external_api {
     }
 
     public static function show_random_popup() {
-        global $OUTPUT;
+        global $OUTPUT, $PAGE;
+
+        $context = context_system::instance();
+        $PAGE->set_context($context);
 
         $data = array('num_students' => FILTER_TEAMWORK_USERS_IN_GROUP);
         $html = $OUTPUT->render_from_template('filter_teamwork/popup-team-selection', $data);
@@ -447,7 +475,10 @@ class filter_teamwork_external extends external_api {
     }
 
     public static function set_random_team($numberofstudent, $courseid, $activityid, $moduletype, $selectgroupid) {
-        global $DB;
+        global $DB, $PAGE;
+
+        $context = context_system::instance();
+        $PAGE->set_context($context);
 
         $arrselectid = json_decode($selectgroupid);
 
@@ -494,7 +525,10 @@ class filter_teamwork_external extends external_api {
     }
 
     public static function set_new_team_name($cardid, $cardname) {
-        global $DB;
+        global $DB, $PAGE;
+
+        $context = context_system::instance();
+        $PAGE->set_context($context);
 
         $team = $DB->get_record('teamwork_groups', array('id' => $cardid));
         if (!empty($team)) {
@@ -530,7 +564,10 @@ class filter_teamwork_external extends external_api {
     }
 
     public static function drag_student_card($courseid, $activityid, $moduletype, $selectgroupid, $newteamspost, $draguserid) {
-        global $USER, $DB;
+        global $USER, $DB, $PAGE;
+
+        $context = context_system::instance();
+        $PAGE->set_context($context);
 
         $newteams = json_decode($newteamspost);
 
@@ -637,7 +674,10 @@ class filter_teamwork_external extends external_api {
 
     public static function student_settings_popup_data($courseid, $activityid, $moduletype, $teamnumbers, $teamusernumbers,
             $teamuserallowenddate, $teamuserenddate, $teamuserendmonth, $teamuserendyear, $teamuserendhour, $teamuserendminute) {
-        global $DB;
+        global $DB, $PAGE;
+
+        $context = context_system::instance();
+        $PAGE->set_context($context);
 
         $result = array();
 
