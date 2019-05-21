@@ -78,7 +78,7 @@ class filter_teamwork extends moodle_text_filter {
                     $text .= '<style>.singlebutton{display:none;}</style>';
                 }
 
-                if ($teamwork->teamuserallowenddate) {
+                if (!empty($teamwork->teamuserallowenddate)) {
                     $text .= html_writer::tag('div',
                             get_string('letsubmitafterteamworkenddate', 'filter_teamwork', userdate($teamwork->teamuserenddate)),
                             ['class' => 'teawmworkenddatemessage']);
