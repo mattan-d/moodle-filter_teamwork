@@ -36,6 +36,7 @@ Requirements
 Moodle version:  Moodle 3.6+
 PHP version: 7.0+
 DB version: MySQL 5.6+ / MariaDB 5.5+
+Browser: Chrome
 
 License
 -------
