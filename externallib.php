@@ -299,7 +299,7 @@ class filter_teamwork_external extends external_api {
             $dataobject->creatorid = $USER->id;
             $dataobject->moduleid = $activityid;
             $dataobject->type = $moduletype;
-            $dataobject->studentediting = 1;
+            $dataobject->studentediting = 0;
             $dataobject->active = 1;
             $dataobject->timecreated = time();
             $dataobject->timemodified = time();

@@ -273,6 +273,7 @@ define([
                     // Close skin popup.
                     if (target.classList.contains(`skin_close`)) {
                         skin.remove();
+                        document.location.reload();
                         return;
                     }
 
