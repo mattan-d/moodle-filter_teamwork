@@ -388,4 +388,31 @@ class observer {
 
         return true;
     }
+
+    /**
+     * @param \core\event\course_module_deleted $event
+     * @return bool
+     * @throws \dml_exception
+     */
+    public static function delete_teamwork_tables(\core\event\course_module_deleted $event): bool {
+
+        $teamwork = get_teamwork_by_cmid($event->contextinstanceid);
+
+        if (!empty($teamwork)) {
+            $teamworkgroups = get_teamworkgroups_by_teamworkid($teamwork->id);
+
+            if (!empty($teamworkgroups)) {
+                $teamworkmembers = get_teamworkmembers_by_teamworkgroups($teamworkgroups);
+                delete_teamworkmembers($teamworkmembers);
+            }
+
+            delete_teamworkgroups($teamworkgroups);
+
+            delete_teamwork($teamwork->id);
+
+        }
+
+        return true;
+    }
+
 }

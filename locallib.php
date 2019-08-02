@@ -567,3 +567,67 @@ function add_comments_to_assign($comment) {
         }
     }
 }
+
+function get_teamwork_by_cmid($cmid)
+{
+    global $DB;
+
+    $teamwork = $DB->get_record('teamwork', array('moduleid' => $cmid));
+
+    return $teamwork;
+}
+
+function get_teamworkgroups_by_teamworkid($teamworkid)
+{
+    global $DB;
+
+    $teamworkgroups = [];
+    $teamworkgroups = $DB->get_records('teamwork_groups', array('teamworkid' => $teamworkid));
+
+    return $teamworkgroups;
+}
+
+function get_teamworkmembers_by_teamworkgroups($teamworkgroups)
+{
+    global $DB;
+
+    $teamworkmembers = [];
+        foreach ($teamworkgroups as $group) {
+            $sql =
+                    "SELECT tm.userid, CONCAT(u.firstname,' ',u.lastname) name
+                    FROM {teamwork_members} tm
+                    LEFT JOIN {user} u ON(u.id=tm.userid) WHERE tm.teamworkgroupid=?";
+
+            $users = $DB->get_records_sql($sql, array($group->id));
+            $teamworkmembers[] = $users;
+        }
+
+    return $teamworkmembers;
+}
+
+function delete_teamwork($teamworkid)
+{
+    global $DB;
+
+        $DB->delete_records('teamwork', ['id' => $teamworkid]);
+}
+
+function delete_teamworkgroups($teamworkgroups)
+{
+    global $DB;
+
+    foreach ($teamworkgroups as $group) {
+        $DB->delete_records('teamwork_groups', ['id' => $group->id]);
+    }
+}
+
+function delete_teamworkmembers($teamworkmembers)
+{
+    global $DB;
+
+    foreach ($teamworkmembers as $group) {
+        foreach ($group as $member) {
+            $DB->delete_records('teamwork_members', ['userid' => $member->userid]);
+        }
+    }
+}
