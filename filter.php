@@ -32,10 +32,16 @@ require_once($CFG->dirroot . '/filter/teamwork/locallib.php');
  *
  * NOTE: multilang glossary entries are not compatible with this filter.
  */
-class filter_teamwork extends moodle_text_filter {
+class filter_teamwork extends moodle_text_filter
+{
 
-    public function filter($text, array $options = array()) {
+    public function filter($text, array $options = array())
+    {
         global $CFG, $PAGE, $OUTPUT, $DB;
+
+        if (stripos($text, 'card-title')) {
+            return $text;
+        }
 
         $pagesworking = array('mod-assign-view');
         if (!in_array($PAGE->pagetype, $pagesworking)) {
@@ -73,15 +79,15 @@ class filter_teamwork extends moodle_text_filter {
             $teamwork = $DB->get_record('teamwork', array('moduleid' => $activityid, 'type' => get_module_name($activityid)));
             if ($isateacher || (if_user_student_on_course($courseid) && if_access_to_student($activityid))) {
                 $text .= html_writer::tag('button', get_string('open_filter', 'filter_teamwork'),
-                        array('id' => 'open_filter', 'class' => 'btn-primary'));
+                    array('id' => 'open_filter', 'class' => 'btn-primary'));
                 if (!$isateacher && $teamwork->teamuserallowenddate) {
                     $text .= '<style>.singlebutton{display:none;}</style>';
                 }
 
                 if (!empty($teamwork->teamuserallowenddate)) {
                     $text .= html_writer::tag('div',
-                            get_string('letsubmitafterteamworkenddate', 'filter_teamwork', userdate($teamwork->teamuserenddate)),
-                            ['class' => 'teawmworkenddatemessage']);
+                        get_string('letsubmitafterteamworkenddate', 'filter_teamwork', userdate($teamwork->teamuserenddate)),
+                        ['class' => 'teawmworkenddatemessage']);
                 }
 
                 if (!empty($groups) && if_teamwork_enable($activityid)) {
@@ -104,7 +110,7 @@ class filter_teamwork extends moodle_text_filter {
 
         $text .= html_writer::tag('script', '', array('src' => $CFG->wwwroot . '/filter/teamwork/javascript/dragula.js'));
         $PAGE->requires->js_call_amd('filter_teamwork/init', 'init',
-                array($courseid, $activityid, $moduletype, $jsonselectgroupid));
+            array($courseid, $activityid, $moduletype, $jsonselectgroupid));
 
         return $text;
     }
