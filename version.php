@@ -25,6 +25,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2018121202;
+$plugin->version = 2019080201;
 $plugin->requires = 2017050500;
 $plugin->component = 'filter_teamwork';

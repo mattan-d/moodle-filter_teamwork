@@ -51,4 +51,9 @@ $observers = array(
         'callback' => '\filter_teamwork\observer::update_team_memebers_submitted_files_uploaded',
         'schedule' => 'instant',
     ),
+    array (
+        'eventname' => '\core\event\course_module_deleted',
+        'callback'  => '\filter_teamwork\observer::delete_teamwork_tables',
+        'schedule' => 'instant',
+    ),
 );

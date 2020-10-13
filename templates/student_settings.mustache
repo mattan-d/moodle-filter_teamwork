@@ -3,13 +3,13 @@
          <p class="input-description">
              {{#str}}teamnumbers, filter_teamwork{{/str}}
          </p>
-         <input type="text" name="team-numbers" id="teamnumbers" class="student-setting-popup_input" value="{{teamnumbers}}" placeholder="10">
+         <input type="text" name="team-numbers" id="teamnumbers" class="student-setting-popup_input" value="{{#teamnumbers}}{{teamnumbers}}{{/teamnumbers}}{{^teamnumbers}}10{{/teamnumbers}}" placeholder="10">
      </label>
      <label class="input-label" for="teamusernumbers">
          <p class="input-description">
              {{#str}} teamusernumbers, filter_teamwork{{/str}}
          </p>
-         <input type="text" name="team-user-numbers" id="teamusernumbers" class="student-setting-popup_input" value="{{teamusernumbers}}" placeholder="3">
+         <input type="text" name="team-user-numbers" id="teamusernumbers" class="student-setting-popup_input" value="{{#teamusernumbers}}{{teamusernumbers}}{{/teamusernumbers}}{{^teamusernumbers}}3{{/teamusernumbers}}" placeholder="3">
      </label>
      <label class="input-label" for="teamuserenddate">
          <p class="input-description">
