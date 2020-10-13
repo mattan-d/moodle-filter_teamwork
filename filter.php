@@ -39,6 +39,7 @@ class filter_teamwork extends moodle_text_filter
     {
         global $CFG, $PAGE, $OUTPUT, $DB;
 
+        // added by mattan
         if (stripos($text, 'card-title')) {
             return $text;
         }
